@@ -32,7 +32,7 @@ require (
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golang/protobuf v1.4.3
 	github.com/gomodule/redigo v2.0.1-0.20191111085604-09d84710e01a+incompatible
-	github.com/googleapis/gnostic v0.3.1 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.2
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.3.0
 	github.com/hashicorp/errwrap v1.1.0 // indirect
@@ -57,9 +57,10 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	k8s.io/api v0.0.0-20191004102349-159aefb8556b // kubernetes-1.14.10
-	k8s.io/apimachinery v0.0.0-20191004074956-c5d2f014d689 // kubernetes-1.14.10
+	k8s.io/apimachinery v0.20.2 // kubernetes-1.14.10
 	k8s.io/client-go v11.0.1-0.20191029005444-8e4128053008+incompatible // kubernetes-1.14.10
 	k8s.io/klog v1.0.0 // indirect
 	k8s.io/utils v0.0.0-20200729134348-d5654de09c73 // indirect
+	sigs.k8s.io/kind v0.11.1 // indirect
 	sigs.k8s.io/yaml v1.2.0 // indirect
 )

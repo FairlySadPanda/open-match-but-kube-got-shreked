@@ -1,0 +1,117 @@
+version: "3.7"
+
+# Security policy
+# ConfigMap to set up Redis
+# ConfigMap to set up Redis health check
+# ConfigMap to set up OpenMatch
+# A ConfigMap is an API object used to store non-confidential data in key-value pairs.
+# Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.
+# Service Account (ID) for Redis
+# Service Account (ID) for Open-Match 'unpreivileged'
+# A "Role" - access rights
+# More Role stuff.
+
+services:
+  open-match-redis:
+    image: bitnami/redis:latest
+    environment:
+      REDIS_MASTER_PORT_NUMBER: "6379"
+      ALLOW_EMPTY_PASSWORD: "yes"
+      REDIS_TLS_ENABLED: "no"
+      REDIS_PORT: "6379"
+      REDIS_DATA_DIR: /data
+    command: '/bin/bash -c /opt/bitnami/scripts/start-scripts/start-node.sh'
+    ports: 
+      - 6379:6379
+    user: '1001'
+    volumes:
+      - /opt/bitnami/scripts/start-scripts
+      - ${PWD}/start-node.sh:/opt/bitnami/scripts/start-scripts/start-node.sh
+      - /health
+      - /tmp:/data
+      - /opt/bitnami/redis/mounted-etc
+      - ${PWD}/master.conf:/opt/bitnami/redis/mounted-etc/master.conf
+      - /opt/bitnami/redis/etc
+      - ${PWD}/redis.conf:/opt/bitnami/redis/etc/redis.conf
+  open-match-redis-sentinel:
+    image: bitnami/redis-sentinel
+    depends_on:
+      - open-match-redis
+    command: '/bin/bash -c /opt/bitnami/scripts/start-scripts/start-sentinel.sh'
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+      REDIS_SENTINEL_TLS_ENABLED: "no"
+      REDIS_SENTINEL_PORT: "26379"
+    ports:
+      - 26379:26379
+    user: '1001'
+    volumes:
+      - /opt/bitnami/scripts/start-scripts
+      - ${PWD}/start-sentinel.sh:/opt/bitnami/scripts/start-scripts/start-sentinel.sh
+      - /health
+      - /tmp:/data
+      - /opt/bitnami/redis-sentinel/mounted-etc
+      - ${PWD}/sentinel.conf:/opt/bitnami/redis-sentinel/mounted-etc/sentinel.conf
+      - ${PWD}/original_sentinel.conf:/opt/bitnami/redis-sentinel/mounted-etc/original_sentinel.conf
+      - /opt/bitnami/redis-sentinel/etc
+      #- ${PWD}/redis.conf:/opt/bitnami/redis-sentinel/etc/redis.conf
+  open-match-backend:
+    image: gcr.io/foo/openmatch-backend:0.0.0-dev-eca40e3
+    ports:
+      - 50505:50505
+      - 51505:51505
+    volumes:
+      - /app/config/default
+      - ${PWD}/matchmaker_config_default.yaml:/app/config/default/matchmaker_config_default.yaml
+      - /app/config/override
+      - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
+  open-match-frontend:
+    image: gcr.io/foo/openmatch-frontend:0.0.0-dev-eca40e3
+    ports:
+      - 50504:50504
+      - 51504:51504
+    volumes:
+      - /app/config/default
+      - ${PWD}/matchmaker_config_default.yaml:/app/config/default/matchmaker_config_default.yaml
+      - /app/config/override
+      - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
+  open-match-query:
+    image: gcr.io/foo/openmatch-query:0.0.0-dev-eca40e3
+    ports:
+      - 50503:50503
+      - 51503:51505
+    volumes:
+      - /app/config/default
+      - ${PWD}/matchmaker_config_default.yaml:/app/config/default/matchmaker_config_default.yaml
+      - /app/config/override
+      - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
+  open-match-synchronizer:
+    image: gcr.io/foo/openmatch-synchronizer:0.0.0-dev-eca40e3
+    ports:
+      - 50506:50506
+      - 51506:51506
+    volumes:
+      - /app/config/default
+      - ${PWD}/matchmaker_config_default.yaml:/app/config/default/matchmaker_config_default.yaml
+      - /app/config/override
+      - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
+  open-match-matchfunction:
+    image: open-match-matchfunction
+    ports:
+      - 50502:50502
+      - 51502:51502
+    volumes:
+      - /app/config/default
+      - ${PWD}/matchmaker_config_default.yaml:/app/config/default/matchmaker_config_default.yaml
+      - /app/config/override
+      - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
+  open-match-evaluator:
+    image: open-match-evaluator
+    ports:
+      - 50508:50508
+      - 51508:51508
+    volumes:
+      - /app/config/default
+      - ${PWD}/matchmaker_config_default.yaml:/app/config/default/matchmaker_config_default.yaml
+      - /app/config/override
+      - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml

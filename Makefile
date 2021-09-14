@@ -148,7 +148,7 @@ export PATH := $(TOOLCHAIN_BIN):$(PATH)
 
 # Get the project from gcloud if it's not set.
 ifeq ($(GCP_PROJECT_ID),)
-	export GCP_PROJECT_ID = $(shell gcloud config list --format 'value(core.project)')
+	export GCP_PROJECT_ID = foo
 endif
 
 ifeq ($(OS),Windows_NT)

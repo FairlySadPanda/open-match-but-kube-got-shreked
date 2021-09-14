@@ -15,13 +15,13 @@
 package mmf
 
 import (
-	// Uncomment if following the tutorial
-	// "github.com/golang/protobuf/ptypes"
-	// "github.com/golang/protobuf/ptypes/any"
-
 	"fmt"
 	"log"
 	"time"
+
+	"github.com/golang/protobuf/ptypes"
+	"github.com/golang/protobuf/ptypes/any"
+	"github.com/google/uuid"
 
 	"open-match.dev/open-match/pkg/matchfunction"
 	"open-match.dev/open-match/pkg/pb"
@@ -88,13 +88,25 @@ func makeMatches(p *pb.MatchProfile, poolTickets map[string][]*pb.Ticket) ([]*pb
 			break
 		}
 
-		// Add score calculation logic here.
+		matchScore := scoreCalculator(matchTickets)
+		evaluationInput, err := ptypes.MarshalAny(&pb.DefaultEvaluationCriteria{
+			Score: matchScore,
+		})
 
+		if err != nil {
+			log.Printf("Failed to marshal DefaultEvaluationCriteria, got %s.", err.Error())
+			return nil, fmt.Errorf("Failed to marshal DefaultEvaluationCriteria, got %w", err)
+		}
+
+		log.Printf("Score for the generated match is %v", matchScore)
 		matches = append(matches, &pb.Match{
-			MatchId:       fmt.Sprintf("profile-%v-time-%v-%v", p.GetName(), time.Now().Format("2006-01-02T15:04:05.00"), count),
+			MatchId:       uuid.NewString(),
 			MatchProfile:  p.GetName(),
 			MatchFunction: matchName,
 			Tickets:       matchTickets,
+			Extensions: map[string]*any.Any{
+				"evaluation_input": evaluationInput,
+			},
 		})
 
 		count++
@@ -103,8 +115,17 @@ func makeMatches(p *pb.MatchProfile, poolTickets map[string][]*pb.Ticket) ([]*pb
 	return matches, nil
 }
 
+// This match function defines the quality of a match as the sum of the wait time
+// of all the tickets in this match. When deduplicating overlapping matches, the
+// evaluator will pick the match with the higher the score, thus picking the one
+// with longer aggregate player wait times.
 func scoreCalculator(tickets []*pb.Ticket) float64 {
 	matchScore := 0.0
-	// Add your logic to compute the score for this Match here
+	now := float64(time.Now().UnixNano())
+	for _, ticket := range tickets {
+		waitTime := now - ticket.GetSearchFields().GetDoubleArgs()["time.enterqueue"]
+		matchScore += waitTime
+	}
+
 	return matchScore
 }

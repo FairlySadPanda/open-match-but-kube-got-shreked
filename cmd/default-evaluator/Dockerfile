@@ -17,8 +17,8 @@ WORKDIR /app
 ENV GO111MODULE=on
 
 COPY . .
-COPY ../../../ ./the_entire_project
+COPY ../../ ./the_entire_project
 RUN go get
-RUN go build -o matchfunction .
+RUN go build -o evaluator .
 
-CMD ["/app/matchfunction"]
+CMD ["/app/evaluator"]

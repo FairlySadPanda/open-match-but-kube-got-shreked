@@ -1,0 +1,78 @@
+logging:
+  level: debug
+  format: text
+  rpc: false
+    # Open Match applies the exponential backoff strategy for its retryable gRPC calls.
+    # The settings below are the default backoff configuration used in Open Match.
+    # See https://github.com/cenkalti/backoff/blob/v3/exponential.go for detailed explanations
+backoff:
+  # The initial retry interval (in milliseconds)
+  initialInterval: 100ms
+  # maxInterval caps the maximum time elapsed for a retry interval
+  maxInterval: 500ms
+  # The next retry interval is multiplied by this multiplier
+  multiplier: 1.5
+  # Randomize the retry interval
+  randFactor: 0.5
+  # maxElapsedTime caps the retry time (in milliseconds)
+  maxElapsedTime: 3000ms
+
+api:
+  backend:
+    hostname: "open-match-backend"
+    grpcport: "50505"
+    httpport: "51505"
+  frontend:
+    hostname: "open-match-frontend"
+    grpcport: "50504"
+    httpport: "51504"
+  query:
+    hostname: "open-match-query"
+    grpcport: "50503"
+    httpport: "51503"
+  synchronizer:
+    hostname: "open-match-synchronizer"
+    grpcport: "50506"
+    httpport: "51506"
+  swaggerui:
+    hostname: "open-match-swaggerui"
+    httpport: "51500"
+
+  # Configurations for api.test and api.scale are used for testing.
+  test:
+    hostname: "open-match-test"
+    grpcport: "50509"
+    httpport: "51509"
+  scale:
+    httpport: "51509"
+
+redis:
+  sentinelPort: 26379
+  sentinelMaster: om-redis-master
+  sentinelHostname: open-match-redis-sentinel
+  sentinelUsePassword: false
+  usePassword: false
+  passwordPath: /opt/bitnami/redis/secrets/redis-password
+  pool:
+    maxIdle: 200
+    maxActive: 0
+    idleTimeout: 0
+    healthCheckTimeout: 300ms
+
+telemetry:
+  reportingPeriod: "1m"
+  traceSamplingFraction: "0.01"
+  zpages:
+    enable: "true"
+  jaeger:
+    enable: "false"
+    agentEndpoint: ""
+    collectorEndpoint: ""
+  prometheus:
+    enable: "false"
+    endpoint: "/metrics"
+    serviceDiscovery: "true"
+  stackdriverMetrics:
+    enable: "false"
+    gcpProjectId: "replace_with_your_project_id"
+    prefix: "open_match"

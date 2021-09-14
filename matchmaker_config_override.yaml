@@ -1,0 +1,21 @@
+# Length of time between first fetch matches call, and when no further fetch
+# matches calls will join the current evaluation/synchronization cycle, 
+# instead waiting for the next cycle.
+registrationInterval:  "250ms"
+# Length of time after match function as started before it will be canceled,
+# and evaluator call input is EOF.
+proposalCollectionInterval: "20s"
+# Time after a ticket has been returned from fetch matches (marked as pending)
+# before it automatically becomes active again and will be returned by query
+# calls.
+pendingReleaseTimeout: "1m"
+# Time after a ticket has been assigned before it is automatically delted.
+assignedDeleteTimeout: "10m"
+# Maximum number of tickets to return on a single QueryTicketsResponse.
+queryPageSize: 10000
+backfillLockTimeout: "1m"
+api:
+  evaluator:
+    hostname: "open-match-evaluator"
+    grpcport: "50508"
+    httpport: "51508"

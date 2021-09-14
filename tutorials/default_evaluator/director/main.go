@@ -32,9 +32,9 @@ import (
 
 const (
 	// The endpoint for the Open Match Backend service.
-	omBackendEndpoint = "open-match-backend.open-match.svc.cluster.local:50505"
+	omBackendEndpoint = "localhost:50505"
 	// The Host and Port for the Match Function service endpoint.
-	functionHostName       = "default-eval-tutorial-matchfunction.default-eval-tutorial.svc.cluster.local"
+	functionHostName       = "open-match-matchfunction"
 	functionPort     int32 = 50502
 )
 
@@ -52,7 +52,7 @@ func main() {
 	profiles := generateProfiles()
 	log.Printf("Fetching matches for %v profiles", len(profiles))
 
-	for range time.Tick(time.Second * 5) {
+	for range time.Tick(time.Second * 1) {
 		// Fetch matches for each profile and make random assignments for Tickets in
 		// the matches returned.
 		var wg sync.WaitGroup
