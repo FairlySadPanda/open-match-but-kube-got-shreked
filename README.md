@@ -1,6 +1,6 @@
 ## Open Match But Kube Got Shreked
 
-[https://github.com/googleforgames/open-match](The original Open-Match repo is here, and has lots of examples and other code to dig through once you've taken a look here.)
+[The original Open-Match repo is here, and has lots of examples and other code to dig through once you've taken a look here.](https://github.com/googleforgames/open-match)
 
 OMBKGS is a fork of Google's Open-Match which focusses around getting the complexity out of the original Open-Match solution, and hacking the repository down to its essentials for local use and extension by curious parties.
 
