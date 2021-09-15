@@ -13,7 +13,7 @@ version: "3.7"
 
 services:
   open-match-redis:
-    image: bitnami/redis:latest
+    image: bitnami/redis
     environment:
       REDIS_MASTER_PORT_NUMBER: "6379"
       ALLOW_EMPTY_PASSWORD: "yes"
@@ -56,7 +56,7 @@ services:
       - /opt/bitnami/redis-sentinel/etc
       #- ${PWD}/redis.conf:/opt/bitnami/redis-sentinel/etc/redis.conf
   open-match-backend:
-    image: gcr.io/foo/openmatch-backend:0.0.0-dev-eca40e3
+    image: openmatch-backend:0.0.0-dev
     ports:
       - 50505:50505
       - 51505:51505
@@ -66,7 +66,7 @@ services:
       - /app/config/override
       - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
   open-match-frontend:
-    image: gcr.io/foo/openmatch-frontend:0.0.0-dev-eca40e3
+    image: openmatch-frontend:0.0.0-dev
     ports:
       - 50504:50504
       - 51504:51504
@@ -76,7 +76,7 @@ services:
       - /app/config/override
       - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
   open-match-query:
-    image: gcr.io/foo/openmatch-query:0.0.0-dev-eca40e3
+    image: openmatch-query:0.0.0-dev
     ports:
       - 50503:50503
       - 51503:51505
@@ -86,7 +86,7 @@ services:
       - /app/config/override
       - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
   open-match-synchronizer:
-    image: gcr.io/foo/openmatch-synchronizer:0.0.0-dev-eca40e3
+    image: openmatch-synchronizer:0.0.0-dev
     ports:
       - 50506:50506
       - 51506:51506
@@ -96,7 +96,7 @@ services:
       - /app/config/override
       - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
   open-match-matchfunction:
-    image: open-match-matchfunction
+    image: openmatch-matchfunction:0.0.0-dev
     ports:
       - 50502:50502
       - 51502:51502
@@ -106,7 +106,7 @@ services:
       - /app/config/override
       - ${PWD}/matchmaker_config_override.yaml:/app/config/override/matchmaker_config_override.yaml
   open-match-evaluator:
-    image: open-match-evaluator
+    image: openmatch-default-evaluator:0.0.0-dev
     ports:
       - 50508:50508
       - 51508:51508

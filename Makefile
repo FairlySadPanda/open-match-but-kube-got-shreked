@@ -56,7 +56,7 @@
 BASE_VERSION = 0.0.0-dev
 SHORT_SHA = $(shell git rev-parse --short=7 HEAD | tr -d [:punct:])
 BRANCH_NAME = $(shell git rev-parse --abbrev-ref HEAD | tr -d [:punct:])
-VERSION = $(BASE_VERSION)-$(SHORT_SHA)
+VERSION = $(BASE_VERSION)
 BUILD_DATE = $(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 YEAR_MONTH = $(shell date -u +'%Y%m')
 YEAR_MONTH_DAY = $(shell date -u +'%Y%m%d')
@@ -88,7 +88,7 @@ GCP_PROJECT_ID ?=
 GCP_PROJECT_FLAG = --project=$(GCP_PROJECT_ID)
 OPEN_MATCH_BUILD_PROJECT_ID = open-match-build
 OPEN_MATCH_PUBLIC_IMAGES_PROJECT_ID = open-match-public-images
-REGISTRY ?= gcr.io/$(GCP_PROJECT_ID)
+REGISTRY ?= $(GCP_PROJECT_ID)
 TAG = $(VERSION)
 ALTERNATE_TAG = dev
 VERSIONED_CANARY_TAG = $(BASE_VERSION)-canary
@@ -148,7 +148,7 @@ export PATH := $(TOOLCHAIN_BIN):$(PATH)
 
 # Get the project from gcloud if it's not set.
 ifeq ($(GCP_PROJECT_ID),)
-	export GCP_PROJECT_ID = foo
+	export GCP_PROJECT_ID = 
 endif
 
 ifeq ($(OS),Windows_NT)
@@ -198,7 +198,7 @@ ALL_PROTOS = $(GOLANG_PROTOS) $(SWAGGER_JSON_DOCS)
 CMDS = $(notdir $(wildcard cmd/*))
 
 # Names of the individual images, ommiting the openmatch prefix.
-IMAGES = $(CMDS) mmf-go-soloduel mmf-go-backfill base-build
+IMAGES = $(CMDS) base-build
 
 help:
 	@cat Makefile | grep ^\#\# | grep -v ^\#\#\# |cut -c 4-
@@ -224,19 +224,20 @@ list-images:
 ## build-images / build-<image name>-image
 ##
 build-images: $(foreach IMAGE,$(IMAGES),build-$(IMAGE)-image)
+	docker build -t openmatch-matchfunction:${BASE_VERSION} ./matchfunction/
+	docker image prune -f
 
 # Include all-protos here so that all dependencies are guaranteed to be downloaded after the base image is created.
 # This is important so that the repository does not have any mutations while building individual images.
 build-base-build-image: docker $(ALL_PROTOS)
-	docker build -f Dockerfile.base-build -t open-match-base-build -t $(REGISTRY)/openmatch-base-build:$(TAG) -t $(REGISTRY)/openmatch-base-build:$(ALTERNATE_TAG) .
+	docker build -f Dockerfile.base-build -t open-match-base-build .
 
 $(foreach CMD,$(CMDS),build-$(CMD)-image): build-%-image: docker build-base-build-image
 	docker build \
 		-f Dockerfile.cmd \
 		$(IMAGE_BUILD_ARGS) \
 		--build-arg=IMAGE_TITLE=$* \
-		-t $(REGISTRY)/openmatch-$*:$(TAG) \
-		-t $(REGISTRY)/openmatch-$*:$(ALTERNATE_TAG) \
+		-t openmatch-$*:$(TAG) \
 		.
 
 build-mmf-go-soloduel-image: docker build-base-build-image
@@ -272,8 +273,8 @@ endif
 ##
 retag-images: $(foreach IMAGE,$(IMAGES),retag-$(IMAGE)-image)
 
-retag-%-image: SOURCE_REGISTRY = gcr.io/$(OPEN_MATCH_BUILD_PROJECT_ID)
-retag-%-image: TARGET_REGISTRY = gcr.io/$(OPEN_MATCH_PUBLIC_IMAGES_PROJECT_ID)
+retag-%-image: SOURCE_REGISTRY = $(OPEN_MATCH_BUILD_PROJECT_ID)
+retag-%-image: TARGET_REGISTRY = $(OPEN_MATCH_PUBLIC_IMAGES_PROJECT_ID)
 retag-%-image: SOURCE_TAG = canary
 $(foreach IMAGE,$(IMAGES),retag-$(IMAGE)-image): retag-%-image: docker
 	docker pull $(SOURCE_REGISTRY)/openmatch-$*:$(SOURCE_TAG)
@@ -327,7 +328,7 @@ HELM_IMAGE_FLAGS = --set global.image.registry=$(REGISTRY) --set global.image.ta
 
 install-demo: build/toolchain/bin/helm$(EXE_EXTENSION)
 	cp $(REPOSITORY_ROOT)/install/02-open-match-demo.yaml $(REPOSITORY_ROOT)/install/tmp-demo.yaml
-	$(SED_REPLACE) 's|gcr.io/open-match-public-images|$(REGISTRY)|g' $(REPOSITORY_ROOT)/install/tmp-demo.yaml
+	$(SED_REPLACE) 's|open-match-public-images|$(REGISTRY)|g' $(REPOSITORY_ROOT)/install/tmp-demo.yaml
 	$(SED_REPLACE) 's|0.0.0-dev|$(TAG)|g' $(REPOSITORY_ROOT)/install/tmp-demo.yaml
 	$(KUBECTL) apply -f $(REPOSITORY_ROOT)/install/tmp-demo.yaml
 	rm $(REPOSITORY_ROOT)/install/tmp-demo.yaml
@@ -394,7 +395,7 @@ delete-chart: build/toolchain/bin/helm$(EXE_EXTENSION) build/toolchain/bin/kubec
 	-$(KUBECTL) delete namespace $(OPEN_MATCH_KUBERNETES_NAMESPACE)-demo
 
 ifneq ($(BASE_VERSION), 0.0.0-dev)
-install/yaml/: REGISTRY = gcr.io/$(OPEN_MATCH_PUBLIC_IMAGES_PROJECT_ID)
+install/yaml/: REGISTRY = $(OPEN_MATCH_PUBLIC_IMAGES_PROJECT_ID)
 install/yaml/: TAG = $(BASE_VERSION)
 endif
 install/yaml/: update-chart-deps install/yaml/install.yaml install/yaml/01-open-match-core.yaml install/yaml/02-open-match-demo.yaml install/yaml/03-prometheus-chart.yaml install/yaml/04-grafana-chart.yaml install/yaml/05-jaeger-chart.yaml install/yaml/06-open-match-override-configmap.yaml install/yaml/07-open-match-default-evaluator.yaml
@@ -411,7 +412,7 @@ install/yaml/02-open-match-demo.yaml: build/toolchain/bin/helm$(EXE_EXTENSION)
 	mkdir -p install/yaml/
 	cp $(REPOSITORY_ROOT)/install/02-open-match-demo.yaml $(REPOSITORY_ROOT)/install/yaml/02-open-match-demo.yaml
 	$(SED_REPLACE) 's|0.0.0-dev|$(TAG)|g' $(REPOSITORY_ROOT)/install/yaml/02-open-match-demo.yaml
-	$(SED_REPLACE) 's|gcr.io/open-match-public-images|$(REGISTRY)|g' $(REPOSITORY_ROOT)/install/yaml/02-open-match-demo.yaml
+	$(SED_REPLACE) 's|open-match-public-images|$(REGISTRY)|g' $(REPOSITORY_ROOT)/install/yaml/02-open-match-demo.yaml
 
 install/yaml/03-prometheus-chart.yaml: build/toolchain/bin/helm$(EXE_EXTENSION)
 	mkdir -p install/yaml/
@@ -883,11 +884,11 @@ else
 	exit 1
 endif
 
-preview-release: REGISTRY = gcr.io/$(OPEN_MATCH_PUBLIC_IMAGES_PROJECT_ID)
+preview-release: REGISTRY = $(OPEN_MATCH_PUBLIC_IMAGES_PROJECT_ID)
 preview-release: TAG = $(BASE_VERSION)
 preview-release: validate-preview-release build/release/ retag-images ci-deploy-artifacts
 
-release: REGISTRY = gcr.io/$(OPEN_MATCH_PUBLIC_IMAGES_PROJECT_ID)
+release: REGISTRY = $(OPEN_MATCH_PUBLIC_IMAGES_PROJECT_ID)
 release: TAG = $(BASE_VERSION)
 release: presubmit build/release/
 
