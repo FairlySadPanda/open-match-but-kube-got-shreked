@@ -18,8 +18,8 @@ import (
 	"net/http"
 	"sync"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
 	"google.golang.org/grpc"
-	"open-match.dev/open-match/internal/config"
 )
 
 // ClientCache holds GRPC and HTTP clients based on an address.

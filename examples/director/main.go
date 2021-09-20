@@ -23,8 +23,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"google.golang.org/grpc"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // The Director in this tutorial continously polls Open Match for the Match

@@ -15,11 +15,11 @@
 package minimatch
 
 import (
-	"open-match.dev/open-match/internal/app/backend"
-	"open-match.dev/open-match/internal/app/frontend"
-	"open-match.dev/open-match/internal/app/query"
-	"open-match.dev/open-match/internal/app/synchronizer"
-	"open-match.dev/open-match/internal/appmain"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/backend"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/frontend"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/query"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/synchronizer"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain"
 )
 
 // BindService creates the minimatch service to the server Params.

@@ -18,8 +18,8 @@ package mmf
 import (
 	"context"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"golang.org/x/sync/errgroup"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // MatchFunction is the function signature for the Match Making Function (MMF) to be implemented by the user.

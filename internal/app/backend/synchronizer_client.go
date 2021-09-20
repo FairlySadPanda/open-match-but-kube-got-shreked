@@ -3,9 +3,9 @@ package backend
 import (
 	"context"
 
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/ipb"
-	"open-match.dev/open-match/internal/rpc"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/ipb"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/rpc"
 )
 
 type synchronizerClient struct {

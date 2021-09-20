@@ -15,13 +15,13 @@
 package query
 
 import (
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/statestore"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
 	"google.golang.org/grpc"
-	"open-match.dev/open-match/internal/appmain"
-	"open-match.dev/open-match/internal/statestore"
-	"open-match.dev/open-match/internal/telemetry"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 var (

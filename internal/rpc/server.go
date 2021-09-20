@@ -23,6 +23,9 @@ import (
 	"net/http/httputil"
 	"time"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/logging"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
@@ -36,9 +39,6 @@ import (
 	"go.opencensus.io/plugin/ochttp/propagation/b3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/logging"
-	"open-match.dev/open-match/internal/telemetry"
 )
 
 const (

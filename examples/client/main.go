@@ -19,10 +19,11 @@ package main
 import (
 	"context"
 	"log"
+	"math/rand"
 	"time"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"google.golang.org/grpc"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 const (
@@ -33,6 +34,9 @@ const (
 )
 
 func main() {
+	// Make sure randomization within this program is properly pseudo-random.
+	rand.Seed(time.Now().UnixNano())
+
 	// Connect to Open Match Frontend.
 	conn, err := grpc.Dial(omFrontendEndpoint, grpc.WithInsecure())
 	if err != nil {

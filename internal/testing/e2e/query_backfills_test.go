@@ -19,11 +19,11 @@ import (
 	"io"
 	"testing"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 const (

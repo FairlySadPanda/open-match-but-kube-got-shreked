@@ -17,6 +17,9 @@ package frontend
 import (
 	"context"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/statestore"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/golang/protobuf/ptypes/empty"
@@ -26,9 +29,6 @@ import (
 	"go.opencensus.io/trace"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/statestore"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // frontendService implements the Frontend service that is used to create

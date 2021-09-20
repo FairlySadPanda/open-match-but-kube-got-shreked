@@ -18,44 +18,63 @@ import (
 	"math/rand"
 	"time"
 
-	"open-match.dev/open-match/pkg/pb"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/examples"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
+	"github.com/golang/protobuf/ptypes/any"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 // Ticket generates a Ticket with a mode search field that has one of the
 // randomly selected modes.
 func makeTicket() *pb.Ticket {
+	tags := []string{examples.Region(rand.Intn(4)).ToString()}
+	tags = append(tags, gameModes()...)
+
+	extension := &any.Any{}
+	extension.MarshalFrom(&examples.MatchUsingElo{
+		Elo: float32(generateRandomNormalizedElo()),
+	})
+
 	ticket := &pb.Ticket{
+		// A ticket has an ID
+		// An assignment if it's assigned to a game server
+		// assignments are a string and a metadata map
+		// there's a metadata "Extensions" map
+		// SearchFields provides the search fields
 		SearchFields: &pb.SearchFields{
-			// Tags can support multiple values but for simplicity, the demo function
-			// assumes only single mode selection per Ticket.
-			Tags: gameModes(),
+			// StringArgs is a map of string to string that matches on equality
+			// tags is a search critera that is just string tags
+			// search criteria for doubles - assessed via ranges
 			DoubleArgs: map[string]float64{
-				"time.enterqueue": enterQueueTime(),
+				examples.TimeEnteringQueueKey: enterQueueTime(),
 			},
+			Tags: tags,
 		},
+		Extensions: map[string]*anypb.Any{"Elo": extension},
 	}
 
 	return ticket
 }
 
-// gameModes() selects up to two unique game modes for this Ticket.
+// gameModes selects up to two unique game modes for this Ticket.
 func gameModes() []string {
-	modes := []string{"mode.demo", "mode.ctf", "mode.battleroyale", "mode.2v2"}
-	count := rand.Intn(2) + 1
-	selected := make(map[string]bool)
-	for i := 0; i < count; i++ {
-		mode := modes[rand.Intn(len(modes))]
-		if !selected[mode] {
-			selected[mode] = true
+	if rand.Intn(2) == 1 {
+		return []string{examples.GameMode(rand.Intn(4)).ToString()}
+	}
+
+	modes := map[string]struct{}{}
+	keys := make([]string, 2)
+
+	for i := 0; i < 2; {
+		mode := examples.GameMode(rand.Intn(4)).ToString()
+		if _, ok := modes[mode]; !ok {
+			modes[mode] = struct{}{}
+			keys[i] = mode
+			i++
 		}
 	}
 
-	var result []string
-	for k := range selected {
-		result = append(result, k)
-	}
-
-	return result
+	return keys
 }
 
 // enterQueueTime returns the time at which the Ticket entered matchmaking queue. To simulate
@@ -63,4 +82,9 @@ func gameModes() []string {
 // entry time.
 func enterQueueTime() float64 {
 	return float64(time.Now().Add(-time.Duration(rand.Intn(5)) * time.Second).UnixNano())
+}
+
+// generate a believable range of Elo values based on the mean value - the average player - being rated 1500.
+func generateRandomNormalizedElo() float64 {
+	return rand.NormFloat64()*350 + 1500
 }

@@ -1,3 +1,4 @@
+//go:build !e2ecluster
 // +build !e2ecluster
 
 // Copyright 2019 Google LLC
@@ -23,15 +24,15 @@ import (
 	"time"
 
 	"github.com/Bose/minisentinel"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/evaluator"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/minimatch"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain/apptest"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/rpc"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
+	mmfService "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/testing/mmf"
 	miniredis "github.com/alicebob/miniredis/v2"
 	"github.com/spf13/viper"
-	"open-match.dev/open-match/internal/app/evaluator"
-	"open-match.dev/open-match/internal/app/minimatch"
-	"open-match.dev/open-match/internal/appmain/apptest"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/rpc"
-	"open-match.dev/open-match/internal/telemetry"
-	mmfService "open-match.dev/open-match/internal/testing/mmf"
 )
 
 func start(t *testing.T, eval evaluator.Evaluator, mmf mmfService.MatchFunction) (config.View, func(time.Duration)) {

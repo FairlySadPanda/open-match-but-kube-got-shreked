@@ -19,8 +19,8 @@ import (
 	"log"
 	"net"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"google.golang.org/grpc"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // MatchFunctionService implements pb.MatchFunctionServer, the server generated

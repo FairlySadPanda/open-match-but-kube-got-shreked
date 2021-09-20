@@ -1,3 +1,4 @@
+//go:build e2ecluster
 // +build e2ecluster
 
 // Copyright 2019 Google LLC
@@ -22,10 +23,10 @@ import (
 	"testing"
 	"time"
 
-	"open-match.dev/open-match/internal/app/evaluator"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/statestore"
-	mmfService "open-match.dev/open-match/internal/testing/mmf"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/evaluator"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/statestore"
+	mmfService "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/testing/mmf"
 )
 
 func start(t *testing.T, eval evaluator.Evaluator, mmf mmfService.MatchFunction) (config.View, func(time.Duration)) {

@@ -23,11 +23,11 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // TestAssignTickets covers assigning multiple tickets, using two different

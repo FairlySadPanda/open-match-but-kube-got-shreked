@@ -25,15 +25,15 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
+	shellTesting "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/testing"
+	utilTesting "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/util/testing"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
+	certgenTesting "github.com/FairlySadPanda/open-match-but-kube-got-shreked/tools/certgen/testing"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/telemetry"
-	shellTesting "open-match.dev/open-match/internal/testing"
-	utilTesting "open-match.dev/open-match/internal/util/testing"
-	"open-match.dev/open-match/pkg/pb"
-	certgenTesting "open-match.dev/open-match/tools/certgen/testing"
 )
 
 func TestSecureGRPCFromConfig(t *testing.T) {

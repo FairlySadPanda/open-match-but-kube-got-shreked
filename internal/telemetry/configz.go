@@ -23,8 +23,8 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
 	"github.com/spf13/viper"
-	"open-match.dev/open-match/internal/config"
 )
 
 const (

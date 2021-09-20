@@ -17,11 +17,11 @@ package testing
 import (
 	"testing"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/statestore"
+	utilTesting "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/util/testing"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"
-	"open-match.dev/open-match/internal/statestore"
-	utilTesting "open-match.dev/open-match/internal/util/testing"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 func TestFakeStatestore(t *testing.T) {

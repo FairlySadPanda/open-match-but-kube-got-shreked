@@ -3,9 +3,9 @@ package statestore
 import (
 	"testing"
 
+	utilTesting "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/util/testing"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/stretchr/testify/require"
-	utilTesting "open-match.dev/open-match/internal/util/testing"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 func TestNewMutex(t *testing.T) {

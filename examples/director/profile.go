@@ -15,28 +15,44 @@
 package main
 
 import (
-	"open-match.dev/open-match/pkg/pb"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/examples"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
+	"github.com/golang/protobuf/ptypes/any"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
-// generateProfiles generates test profiles for the matchmaker101 tutorial.
+// generateProfiles generates test profiles.
 func generateProfiles() []*pb.MatchProfile {
 	var profiles []*pb.MatchProfile
-	modes := []string{"mode.demo", "mode.ctf", "mode.battleroyale"}
+	modes := []string{examples.EightBall.ToString(), examples.NineBall.ToString(), examples.KoreanCarom.ToString(), examples.JapaneseCarom.ToString()}
+	regions := []string{examples.Africa.ToString(), examples.Asia.ToString(), examples.Australasia.ToString(), examples.Europe.ToString(), examples.NorthAmerica.ToString(), examples.SouthAmerica.ToString()}
+	extension := &any.Any{}
+	extension.MarshalFrom(&examples.EloRange{
+		Range: 200,
+	})
+
 	for _, mode := range modes {
-		profiles = append(profiles, &pb.MatchProfile{
-			Name: "mode_based_profile",
-			Pools: []*pb.Pool{
-				{
-					Name: "pool_mode_" + mode,
-					TagPresentFilters: []*pb.TagPresentFilter{
-						{
-							Tag: mode,
+		for _, region := range regions {
+			profiles = append(profiles, &pb.MatchProfile{
+				Name: "mode_based_profile",
+				Pools: []*pb.Pool{
+					{
+						Name: mode,
+						TagPresentFilters: []*pb.TagPresentFilter{
+							{
+								Tag: mode,
+							},
+							{
+								Tag: region,
+							},
 						},
 					},
 				},
+				Extensions: map[string]*anypb.Any{"Elo": extension},
 			},
-		},
-		)
+			)
+		}
+
 	}
 
 	return profiles

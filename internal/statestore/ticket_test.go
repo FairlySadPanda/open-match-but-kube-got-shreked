@@ -24,6 +24,10 @@ import (
 	"time"
 
 	"github.com/Bose/minisentinel"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
+	utilTesting "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/util/testing"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	miniredis "github.com/alicebob/miniredis/v2"
 	"github.com/gomodule/redigo/redis"
 	"github.com/rs/xid"
@@ -31,10 +35,6 @@ import (
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/telemetry"
-	utilTesting "open-match.dev/open-match/internal/util/testing"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 func TestStatestoreSetup(t *testing.T) {

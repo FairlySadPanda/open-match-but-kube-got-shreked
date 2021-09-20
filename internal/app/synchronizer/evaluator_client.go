@@ -22,14 +22,14 @@ import (
 	"net/http"
 	"sync"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/rpc"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/rpc"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 var (

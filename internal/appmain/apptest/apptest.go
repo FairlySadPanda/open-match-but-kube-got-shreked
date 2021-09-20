@@ -19,11 +19,11 @@ import (
 	"net"
 	"testing"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/rpc"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
-	"open-match.dev/open-match/internal/appmain"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/rpc"
 )
 
 // ServiceName is a constant used for all in memory tests.

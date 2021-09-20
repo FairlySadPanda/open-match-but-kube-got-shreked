@@ -17,9 +17,9 @@ package statestore
 import (
 	"context"
 
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/telemetry"
-	"open-match.dev/open-match/pkg/pb"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 )
 
 // Service is a generic interface for talking to a storage backend.

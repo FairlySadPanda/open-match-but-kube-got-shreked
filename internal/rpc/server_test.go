@@ -22,12 +22,12 @@ import (
 	"testing"
 	"time"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
+	shellTesting "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/testing"
+	utilTesting "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/util/testing"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
-	"open-match.dev/open-match/internal/telemetry"
-	shellTesting "open-match.dev/open-match/internal/testing"
-	utilTesting "open-match.dev/open-match/internal/util/testing"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 func TestStartStopServer(t *testing.T) {

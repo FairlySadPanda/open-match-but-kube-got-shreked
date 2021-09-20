@@ -18,9 +18,9 @@ import (
 	"testing"
 
 	"github.com/Bose/minisentinel"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/statestore"
 	miniredis "github.com/alicebob/miniredis/v2"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/statestore"
 )
 
 // New creates a new in memory Redis instance with Sentinel for testing.

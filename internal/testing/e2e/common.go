@@ -21,12 +21,12 @@ import (
 	"testing"
 	"time"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/evaluator"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain/apptest"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	mmfService "github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/testing/mmf"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/pkg/errors"
-	"open-match.dev/open-match/internal/app/evaluator"
-	"open-match.dev/open-match/internal/appmain/apptest"
-	"open-match.dev/open-match/internal/config"
-	mmfService "open-match.dev/open-match/internal/testing/mmf"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 var (

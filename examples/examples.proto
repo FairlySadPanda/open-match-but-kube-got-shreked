@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package examples;
+
+option go_package = "github.com/FairlySadPanda/open-match-but-kube-got-shreked/examples";
+
+// Shouldn't trust client-supplied ELO but this is just an example...
+message MatchUsingElo {
+    float elo = 1;
+}
+
+// What ELO range is acceptable?
+message EloRange {
+    float range = 1;
+}

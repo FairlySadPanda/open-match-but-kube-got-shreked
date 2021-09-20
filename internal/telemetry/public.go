@@ -18,11 +18,11 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/trace"
-	"open-match.dev/open-match/internal/config"
 )
 
 var (

@@ -21,12 +21,12 @@ import (
 
 	"go.opencensus.io/stats"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/statestore"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"open-match.dev/open-match/internal/appmain"
-	"open-match.dev/open-match/internal/statestore"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // cache unifies concurrent requests into a single cache update, and

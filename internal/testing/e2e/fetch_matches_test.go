@@ -21,13 +21,13 @@ import (
 	"testing"
 	"time"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/matchfunction"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"open-match.dev/open-match/pkg/matchfunction"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // TestHappyPath does a simple test of successfully creating a match with two tickets.

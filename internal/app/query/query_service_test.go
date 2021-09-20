@@ -17,9 +17,9 @@ package query
 import (
 	"testing"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"
-	"open-match.dev/open-match/internal/config"
 )
 
 func TestGetPageSize(t *testing.T) {

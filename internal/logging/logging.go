@@ -18,9 +18,9 @@ package logging
 import (
 	"strings"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
 	stackdriver "github.com/TV4/logrus-stackdriver-formatter"
 	"github.com/sirupsen/logrus"
-	"open-match.dev/open-match/internal/config"
 )
 
 // ConfigureLogging sets up open match logrus instance using the logging section of the matchmaker_config.json

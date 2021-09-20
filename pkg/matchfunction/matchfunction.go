@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"google.golang.org/grpc"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // QueryPool queries queryService and returns the tickets that belong to the specified pool.

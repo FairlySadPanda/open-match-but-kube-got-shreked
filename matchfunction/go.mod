@@ -1,4 +1,4 @@
-module open-match.dev/open-match/tutorials/matchmaker101/matchfunction
+module github.com/FairlySadPanda/open-match-but-kube-got-shreked/tutorials/matchmaker101/matchfunction
 
 go 1.14
 

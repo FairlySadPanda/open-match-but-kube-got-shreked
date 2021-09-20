@@ -23,7 +23,7 @@ import (
 	"strings"
 	"time"
 
-	certgenInternal "open-match.dev/open-match/tools/certgen/internal"
+	certgenInternal "github.com/FairlySadPanda/open-match-but-kube-got-shreked/tools/certgen/internal"
 )
 
 var (

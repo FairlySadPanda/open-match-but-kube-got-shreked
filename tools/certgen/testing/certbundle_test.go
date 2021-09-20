@@ -17,8 +17,8 @@ package testing
 import (
 	"testing"
 
+	certgenInternal "github.com/FairlySadPanda/open-match-but-kube-got-shreked/tools/certgen/internal"
 	"github.com/stretchr/testify/require"
-	certgenInternal "open-match.dev/open-match/tools/certgen/internal"
 )
 
 const (

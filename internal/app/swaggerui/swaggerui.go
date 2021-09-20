@@ -24,11 +24,11 @@ import (
 	"net/url"
 	"path/filepath"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/logging"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/rpc"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
 	"github.com/sirupsen/logrus"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/logging"
-	"open-match.dev/open-match/internal/rpc"
-	"open-match.dev/open-match/internal/telemetry"
 )
 
 var (

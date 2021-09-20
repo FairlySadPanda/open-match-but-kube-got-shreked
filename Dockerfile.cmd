@@ -24,7 +24,7 @@ FROM gcr.io/distroless/static:nonroot
 ARG IMAGE_TITLE
 WORKDIR /app/
 
-COPY --from=builder --chown=nonroot "/go/src/open-match.dev/open-match/build/cmd/${IMAGE_TITLE}/" "/app/"
+COPY --from=builder --chown=nonroot "/go/src/github.com/FairlySadPanda/open-match-but-kube-got-shreked/build/cmd/${IMAGE_TITLE}/" "/app/"
 
 ENTRYPOINT ["/app/run"]
 

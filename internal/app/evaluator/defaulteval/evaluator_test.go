@@ -18,11 +18,11 @@ import (
 	"context"
 	"testing"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/golang/protobuf/ptypes/any"
 	"github.com/stretchr/testify/require"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 func mustAny(m proto.Message) *any.Any {

@@ -16,8 +16,8 @@
 package main
 
 import (
-	"open-match.dev/open-match/internal/app/backend"
-	"open-match.dev/open-match/internal/appmain"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/backend"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain"
 )
 
 func main() {

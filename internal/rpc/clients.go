@@ -32,6 +32,9 @@ import (
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_tracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/logging"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"go.opencensus.io/plugin/ochttp"
@@ -39,9 +42,6 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/resolver"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/logging"
-	"open-match.dev/open-match/internal/telemetry"
 )
 
 const (

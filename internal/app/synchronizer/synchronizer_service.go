@@ -23,12 +23,12 @@ import (
 
 	"go.opencensus.io/stats"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain/contextcause"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/config"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/ipb"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/statestore"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/sirupsen/logrus"
-	"open-match.dev/open-match/internal/appmain/contextcause"
-	"open-match.dev/open-match/internal/config"
-	"open-match.dev/open-match/internal/ipb"
-	"open-match.dev/open-match/internal/statestore"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 var (

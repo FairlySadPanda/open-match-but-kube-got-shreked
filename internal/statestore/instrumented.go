@@ -17,8 +17,8 @@ package statestore
 import (
 	"context"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"go.opencensus.io/trace"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // instrumentedService is a wrapper for a statestore service that provides instrumentation (metrics and tracing) of the database.

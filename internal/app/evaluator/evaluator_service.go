@@ -19,10 +19,10 @@ import (
 	"context"
 	"io"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/pkg/errors"
 	"go.opencensus.io/stats"
 	"golang.org/x/sync/errgroup"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // Evaluator is the function signature for the Evaluator to be implemented by

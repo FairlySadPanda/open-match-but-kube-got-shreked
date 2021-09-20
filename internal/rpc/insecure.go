@@ -19,11 +19,11 @@ import (
 	"net"
 	"net/http"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/telemetry"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/protojson"
-	"open-match.dev/open-match/internal/telemetry"
 )
 
 type insecureServer struct {

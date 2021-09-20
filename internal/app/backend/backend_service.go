@@ -26,6 +26,11 @@ import (
 
 	"go.opencensus.io/stats"
 
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain/contextcause"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/ipb"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/rpc"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/statestore"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/pkg/pb"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
@@ -36,11 +41,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"open-match.dev/open-match/internal/appmain/contextcause"
-	"open-match.dev/open-match/internal/ipb"
-	"open-match.dev/open-match/internal/rpc"
-	"open-match.dev/open-match/internal/statestore"
-	"open-match.dev/open-match/pkg/pb"
 )
 
 // The service implementing the Backend API that is called to generate matches

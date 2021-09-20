@@ -15,8 +15,8 @@
 package main
 
 import (
-	"open-match.dev/open-match/internal/app/evaluator/defaulteval"
-	"open-match.dev/open-match/internal/appmain"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/app/evaluator/defaulteval"
+	"github.com/FairlySadPanda/open-match-but-kube-got-shreked/internal/appmain"
 )
 
 func main() {
